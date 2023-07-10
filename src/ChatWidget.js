@@ -22,7 +22,15 @@ const ChatWidget = () => {
     const fetchWidgetStyles = async () => {
       const url = 'https://parchedrotatingcommand.alexli81.repl.co/get-widget-styles';
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentUrl: window.location.href,
+          }),
+        });
         const widgetStyles = await response.json();
         setWidgetStyles(widgetStyles);
       } catch (error) {
@@ -48,6 +56,7 @@ const ChatWidget = () => {
 
   const handleNewUserMessage = async (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
+    console.log(`Customer Data: ${customerData}`);
     console.log(`Current Store: ${window.location.href}`);
 
     const newConvoId = uuidv4();
