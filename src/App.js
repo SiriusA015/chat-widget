@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       {/* Your other app components */}
-      <ChatWidget widgetStyles={widgetStyles} setWidgetStyles={setWidgetStyles} />
+      <ChatWidget widgetStyles={widgetStyles} />
     </div>
   );
 }
