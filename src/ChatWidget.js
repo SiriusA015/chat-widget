@@ -37,34 +37,36 @@ const ChatWidget = ({ widgetStyles }) => {
   }, []);
 
   const handleNewUserMessage = async (newMessage) => {
-    console.log(`New message incoming! ${newMessage}`);
-    console.log(`Customer Data: ${customerData}`);
-    console.log(`Current Store: ${window.location.href}`);
+  console.log(`New message incoming! ${newMessage}`);
+  console.log(`Customer Data: ${customerData}`);
+  console.log(`Current Store: ${window.location.href}`);
 
-    const newConvoId = uuidv4();
+  const newConvoId = uuidv4();
 
   const url = 'https://familiarboringthings.alexli81.repl.co/sendChatMessage';
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: newMessage,
-          customerId: customerData?.id,
-          conversationId: newConvoId,
-          currentUrl: window.location.href,
-        }),
-      });
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: newMessage,
+        customerId: customerData?.id,
+        conversationId: newConvoId,
+        currentUrl: window.location.href,
+      }),
+    });
 
-      const { message: serverMessage } = await response.json();
+    // Extract the AI's response from the server's response
+    const { aiResponse } = await response.json();
 
-      addResponseMessage(serverMessage);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+    // Add the AI's response to the chat
+    addResponseMessage(aiResponse);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
 
   return (
     <StyledWidget
