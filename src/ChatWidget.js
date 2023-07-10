@@ -3,9 +3,8 @@ import { Widget, addResponseMessage } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 import { v4 as uuidv4 } from 'uuid';
 
-const ChatWidget = () => {
+const ChatWidget = ({ widgetStyles }) => {
   const [customerData, setCustomerData] = useState(null);
-  const [widgetStyles, setWidgetStyles] = useState(null);
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -19,28 +18,8 @@ const ChatWidget = () => {
       }
     };
 
-    const fetchWidgetStyles = async () => {
-      const url = 'https://parchedrotatingcommand.alexli81.repl.co/get-widget-styles';
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            currentUrl: window.location.href,
-          }),
-        });
-        const widgetStyles = await response.json();
-        setWidgetStyles(widgetStyles);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
     if (window.Shopify && window.Shopify.customer) {
       fetchCustomerData();
-      fetchWidgetStyles();
     }
   }, []);
 
