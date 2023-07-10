@@ -2,6 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Widget, addResponseMessage } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 import { v4 as uuidv4 } from 'uuid';
+import styled from 'styled-components';
+
+// Override styles
+const StyledWidget = styled(Widget)`
+  .rcw-conversation-container > .rcw-header {
+    background-color: red;
+  }
+
+  .rcw-message > .rcw-response {
+    background-color: black;
+    color: white;
+  }
+`;
 
 const ChatWidget = ({ widgetStyles }) => {
   const [customerData, setCustomerData] = useState(null);
@@ -22,32 +35,6 @@ const ChatWidget = ({ widgetStyles }) => {
       fetchCustomerData();
     }
   }, []);
-
-  useEffect(() => {
-    if (widgetStyles) {
-      let styleString = '';
-
-      Object.keys(widgetStyles).forEach((className) => {
-        styleString += `
-          .rcw-${className} {
-            ${objectToCSS(widgetStyles[className])}
-          }
-        `;
-      });
-
-      const styleElement = document.createElement('style');
-      styleElement.textContent = styleString;
-      document.head.appendChild(styleElement);
-    }
-  }, [widgetStyles]);
-
-  const objectToCSS = (obj) => {
-    let cssString = '';
-    Object.keys(obj).forEach((key) => {
-      cssString += `${key}: ${obj[key]}; `;
-    });
-    return cssString;
-  };
 
   const handleNewUserMessage = async (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
@@ -80,7 +67,7 @@ const ChatWidget = ({ widgetStyles }) => {
   };
 
   return (
-    <Widget
+    <StyledWidget
       handleNewUserMessage={handleNewUserMessage}
       title="Chat Widget"
       subtitle="Ask us anything!"
