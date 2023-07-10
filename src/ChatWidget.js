@@ -25,13 +25,29 @@ const ChatWidget = ({ widgetStyles }) => {
 
   useEffect(() => {
     if (widgetStyles) {
-      const root = document.documentElement;
+      let styleString = '';
 
-      Object.keys(widgetStyles).forEach((key) => {
-        root.style.setProperty(`--${key}`, widgetStyles[key]);
+      Object.keys(widgetStyles).forEach((className) => {
+        styleString += `
+          .rcw-${className} {
+            ${objectToCSS(widgetStyles[className])}
+          }
+        `;
       });
+
+      const styleElement = document.createElement('style');
+      styleElement.textContent = styleString;
+      document.head.appendChild(styleElement);
     }
   }, [widgetStyles]);
+
+  const objectToCSS = (obj) => {
+    let cssString = '';
+    Object.keys(obj).forEach((key) => {
+      cssString += `${key}: ${obj[key]}; `;
+    });
+    return cssString;
+  };
 
   const handleNewUserMessage = async (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
