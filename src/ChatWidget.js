@@ -4,25 +4,21 @@ import 'react-chat-widget/lib/styles.css';
 import { v4 as uuidv4 } from 'uuid';
 
 const ChatWidget = () => {
-  // const [customerData, setCustomerData] = useState(null);
   const [widgetStyles, setWidgetStyles] = useState(null);
 
   useEffect(() => {
-    /*const fetchCustomerData = async () => {
-      const url = 'https://your-server-url.com/get-customer-data';
-      try {
-        const response = await fetch(url);
-        const customerData = await response.json();
-        setCustomerData(customerData);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };*/
-
     const fetchWidgetStyles = async () => {
       const url = 'https://parchedrotatingcommand.alexli81.repl.co/get-widget-styles';
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentUrl: window.location.href,
+          }),
+        });
         const widgetStyles = await response.json();
         setWidgetStyles(widgetStyles);
       } catch (error) {
@@ -31,12 +27,10 @@ const ChatWidget = () => {
     };
 
     if (window.Shopify && window.Shopify.customer) {
-      // fetchCustomerData();
       fetchWidgetStyles();
     }
   }, []);
 
-  // Dynamically apply the styles fetched from the server
   useEffect(() => {
     if (widgetStyles) {
       const root = document.documentElement;
@@ -49,7 +43,6 @@ const ChatWidget = () => {
 
   const handleNewUserMessage = async (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
-    // console.log(`Customer Data: ${customerData}`);
     console.log(`Current Store: ${window.location.href}`);
 
     const newConvoId = uuidv4();
@@ -63,7 +56,6 @@ const ChatWidget = () => {
         },
         body: JSON.stringify({
           message: newMessage,
-          // customerId: customerData?.id,
           conversationId: newConvoId,
           currentUrl: window.location.href,
         }),
