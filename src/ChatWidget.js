@@ -43,7 +43,7 @@ const ChatWidget = ({ widgetStyles }) => {
 
     const newConvoId = uuidv4();
 
-    const url = 'https://parchedrotatingcommand.alexli81.repl.co/send-message';
+  const url = 'https://familiarboringthings.alexli81.repl.co/sendChatMessage';
     try {
       const response = await fetch(url, {
         method: 'POST',
