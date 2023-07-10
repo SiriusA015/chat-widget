@@ -1,0 +1,10 @@
+/* chatWidgetStyles.css */
+
+.rcw-conversation-container > .rcw-header {
+  background-color: var(--header-background-color, red);
+}
+
+.rcw-message > .rcw-response {
+  background-color: var(--response-background-color, black);
+  color: var(--response-text-color, white);
+}
