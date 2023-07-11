@@ -5,14 +5,15 @@
   color: var(--header-color, white);
 }
 
-.rcw-conversation-container > .rcw-header .rcw-title {
+.rcw-conversation-container .rcw-title {
   font-size: var(--title-font, 22px);
 }
+
 .rcw-conversation-container > .rcw-header span {
   font-size: var(--subtitle-font, 14px);
 }
 
-.rcw-message > .rcw-message-text {
+.rcw-client .rcw-message-text {
   background-color: var(--primary-color, #a3eaf7);
   color: var(--message-color, black);
 }

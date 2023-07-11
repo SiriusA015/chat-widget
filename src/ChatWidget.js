@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Widget, addResponseMessage } from 'react-chat-widget';
-import 'react-chat-widget/lib/styles.css';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useEffect, useState } from "react";
+import { Widget, addResponseMessage } from "react-chat-widget";
+import "react-chat-widget/lib/styles.css";
+import { v4 as uuidv4 } from "uuid";
 // import styled from 'styled-components';
 import "./chatWidgetStyles.css";
 
@@ -11,24 +11,25 @@ const ChatWidget = ({ widgetStyles }) => {
   useEffect(() => {
     function setWidgetStyles(styles) {
       if (styles) {
-        Object.entries(styles).forEach(([property, value]) =>
-          document.documentElement.style.setProperty(`--${property}`, value)
-        );
+        Object.entries(styles).forEach(([property, value]) => {
+          const convertedProperty = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+          document.documentElement.style.setProperty(`--${convertedProperty}`, value);
+        });
       }
     }
     setWidgetStyles(widgetStyles);
     console.log("init style: ", widgetStyles);
-  }, []);
+  }, [widgetStyles]);
 
   useEffect(() => {
     const fetchCustomerData = async () => {
-      const url = 'https://your-server-url.com/get-customer-data';
+      const url = "https://your-server-url.com/get-customer-data";
       try {
         const response = await fetch(url);
         const customerData = await response.json();
         setCustomerData(customerData);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -38,36 +39,36 @@ const ChatWidget = ({ widgetStyles }) => {
   }, []);
 
   const handleNewUserMessage = async (newMessage) => {
-  console.log(`New message incoming! ${newMessage}`);
-  console.log(`Customer Data: ${customerData}`);
-  console.log(`Current Store: ${window.location.href}`);
+    console.log(`New message incoming! ${newMessage}`);
+    console.log(`Customer Data: ${customerData}`);
+    console.log(`Current Store: ${window.location.href}`);
 
-  const newConvoId = uuidv4();
+    const newConvoId = uuidv4();
 
-  const url = 'https://familiarboringthings.alexli81.repl.co/sendChatMessage';
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        message: newMessage,
-        customerId: customerData?.id,
-        conversationId: newConvoId,
-        currentUrl: window.location.href,
-      }),
-    });
+    const url = "https://familiarboringthings.alexli81.repl.co/sendChatMessage";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: newMessage,
+          customerId: customerData?.id,
+          conversationId: newConvoId,
+          currentUrl: window.location.href,
+        }),
+      });
 
-    // Extract the AI's response from the server's response
-    const { aiResponse } = await response.json();
+      // Extract the AI's response from the server's response
+      const { aiResponse } = await response.json();
 
-    // Add the AI's response to the chat
-    addResponseMessage(aiResponse);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+      // Add the AI's response to the chat
+      addResponseMessage(aiResponse);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <Widget

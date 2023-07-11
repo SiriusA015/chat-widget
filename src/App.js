@@ -1,44 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import ChatWidget from './ChatWidget';
-
-const styleTemp = {
-  hearderBackground: "#004588",
-  hearderColor: "#fff",
-  titleFont: "20px",
-  subtitleFont: "14px",
-  messageBackground: "#a3eaf7",
-  messageColor: "#000",
-  responseBackground: "#000",
-  responseColor: "#fff",
-  chatFont: "14px",
-};
+import React, { useEffect, useState } from "react";
+import ChatWidget from "./ChatWidget";
 
 function App() {
-  const [widgetStyles, setWidgetStyles] = useState(null);
+  const [widgetStyles, setWidgetStyles] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const fetchWidgetStyles = async () => {
-      const url = 'https://parchedrotatingcommand.alexli81.repl.co/get-widget-styles';
+      const url =
+        "https://parchedrotatingcommand.alexli81.repl.co/get-widget-styles";
       try {
         const response = await fetch(url, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             currentUrl: window.location.href,
           }),
         });
         const widgetStyle = await response.json();
-        console.log('response - : ', widgetStyle)
-        setWidgetStyles(widgetStyle);
+        // const widgetStyle = {
+        //   headerBackground: '#abcdef',
+        //   primaryColor: '#123456'
+        // }
+        setIsLoaded(true);     
+        setWidgetStyles(widgetStyle);   
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
-
-    fetchWidgetStyles();
-  }, []);
+    if (!isLoaded) {
+      fetchWidgetStyles();
+    }
+  }, [widgetStyles, isLoaded]);
 
   return (
     <div className="App">
