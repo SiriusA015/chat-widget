@@ -2,22 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Widget, addResponseMessage } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 import { v4 as uuidv4 } from 'uuid';
-import styled from 'styled-components';
-
-// Override styles
-const StyledWidget = styled(Widget)`
-  .rcw-conversation-container > .rcw-header {
-    background-color: red;
-  }
-
-  .rcw-message > .rcw-response {
-    background-color: black;
-    color: white;
-  }
-`;
+// import styled from 'styled-components';
+import "./chatWidgetStyles.css";
 
 const ChatWidget = ({ widgetStyles }) => {
   const [customerData, setCustomerData] = useState(null);
+
+  useEffect(() => {
+    function setWidgetStyles(styles) {
+      if (styles) {
+        Object.entries(styles).forEach(([property, value]) =>
+          document.documentElement.style.setProperty(`--${property}`, value)
+        );
+      }
+    }
+    setWidgetStyles(widgetStyles);
+    console.log("init style: ", widgetStyles);
+  }, []);
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -69,11 +70,12 @@ const ChatWidget = ({ widgetStyles }) => {
 };
 
   return (
-    <StyledWidget
+    <Widget
       handleNewUserMessage={handleNewUserMessage}
       title="Chat Widget"
       subtitle="Ask us anything!"
       senderPlaceHolder="Type a message..."
+      emojis="true"
     />
   );
 };

@@ -1,10 +1,27 @@
 /* chatWidgetStyles.css */
 
 .rcw-conversation-container > .rcw-header {
-  background-color: var(--header-background-color, red);
+  background-color: var(--header-background-color, #004588);
+  color: var(--header-color, white);
+}
+
+.rcw-conversation-container > .rcw-header .rcw-title {
+  font-size: var(--title-font, 22px);
+}
+.rcw-conversation-container > .rcw-header span {
+  font-size: var(--subtitle-font, 14px);
+}
+
+.rcw-message > .rcw-message-text {
+  background-color: var(--message-background, #a3eaf7);
+  color: var(--message-color, black);
 }
 
 .rcw-message > .rcw-response {
-  background-color: var(--response-background-color, black);
-  color: var(--response-text-color, white);
+  background-color: var(--response-background, black);
+  color: var(--response-color, white);
+}
+
+.rcw-messages-container {
+  font-size: var(--chat-font, 12px);
 }
