@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import ChatWidget from './ChatWidget';
 
+const styleTemp = {
+  hearderBackground: "#004588",
+  hearderColor: "#fff",
+  titleFont: "20px",
+  subtitleFont: "14px",
+  messageBackground: "#a3eaf7",
+  messageColor: "#000",
+  responseBackground: "#000",
+  responseColor: "#fff",
+  chatFont: "14px",
+};
+
 function App() {
   const [widgetStyles, setWidgetStyles] = useState(null);
 
@@ -17,8 +29,9 @@ function App() {
             currentUrl: window.location.href,
           }),
         });
-        const widgetStyles = await response.json();
-        setWidgetStyles(widgetStyles);
+        const widgetStyle = await response.json();
+        console.log('response: ', widgetStyle)
+        setWidgetStyles(widgetStyle);
       } catch (error) {
         console.error('Error:', error);
       }
