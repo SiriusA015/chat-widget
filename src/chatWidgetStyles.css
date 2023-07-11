@@ -1,7 +1,7 @@
 /* chatWidgetStyles.css */
 
 .rcw-conversation-container > .rcw-header {
-  background-color: var(--header-background-color, #004588);
+  background-color: var(--header-background, #004588);
   color: var(--header-color, white);
 }
 
@@ -13,12 +13,12 @@
 }
 
 .rcw-message > .rcw-message-text {
-  background-color: var(--message-background, #a3eaf7);
+  background-color: var(--primary-color, #a3eaf7);
   color: var(--message-color, black);
 }
 
 .rcw-message > .rcw-response {
-  background-color: var(--response-background, black);
+  background-color: var(--secondary-color, black);
   color: var(--response-color, white);
 }
 

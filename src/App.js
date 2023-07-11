@@ -30,6 +30,7 @@ function App() {
           }),
         });
         const widgetStyle = await response.json();
+        console.log('response: ', widgetStyle)
         setWidgetStyles(widgetStyle);
       } catch (error) {
         console.error('Error:', error);
@@ -42,7 +43,7 @@ function App() {
   return (
     <div className="App">
       {/* Your other app components */}
-      <ChatWidget widgetStyles={styleTemp} />
+      <ChatWidget widgetStyles={widgetStyles} />
     </div>
   );
 }
