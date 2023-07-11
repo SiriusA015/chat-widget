@@ -30,7 +30,7 @@ function App() {
           }),
         });
         const widgetStyle = await response.json();
-        console.log('response: ', widgetStyle)
+        console.log('response - : ', widgetStyle)
         setWidgetStyles(widgetStyle);
       } catch (error) {
         console.error('Error:', error);
