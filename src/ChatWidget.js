@@ -5,21 +5,26 @@ import { v4 as uuidv4 } from "uuid";
 // import styled from 'styled-components';
 import "./chatWidgetStyles.css";
 
-const ChatWidget = ({ widgetStyles }) => {
+const ChatWidget = () => {
   const [customerData, setCustomerData] = useState(null);
 
-  useEffect(() => {
-    function setWidgetStyles(styles) {
-      if (styles) {
-        Object.entries(styles).forEach(([property, value]) => {
-          const convertedProperty = property.replace(/([A-Z])/g, '-$1').toLowerCase();
-          document.documentElement.style.setProperty(`--${convertedProperty}`, value);
-        });
-      }
-    }
-    setWidgetStyles(widgetStyles);
-    console.log("init style: ", widgetStyles);
-  }, [widgetStyles]);
+  // useEffect(() => {
+  //   function setWidgetStyles(styles) {
+  //     if (styles) {
+  //       Object.entries(styles).forEach(([property, value]) => {
+  //         const convertedProperty = property
+  //           .replace(/([A-Z])/g, "-$1")
+  //           .toLowerCase();
+  //         document.documentElement.style.setProperty(
+  //           `--${convertedProperty}`,
+  //           value
+  //         );
+  //       });
+  //     }
+  //   }
+  //   setWidgetStyles(widgetStyles);
+  //   console.log("init style: ", widgetStyles);
+  // }, [widgetStyles]);
 
   useEffect(() => {
     const fetchCustomerData = async () => {
