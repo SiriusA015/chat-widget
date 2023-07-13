@@ -9,7 +9,7 @@ const initialState = {
   secondaryColor: "black",
   responseColor: "white",
   chatFont: "12px",
-  launcherColor: "#35cce6",
+  launcherColor: "#004588",
 };
 
 export const stylesSlice = createSlice({

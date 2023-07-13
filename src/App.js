@@ -25,6 +25,9 @@ function App() {
         });
         const styleData = await response.json();
         setIsLoaded(true);
+        if (styleData.headerBackground) {
+          styleData.launcherColor = styleData.headerBackground;
+        }
         console.log("style from db: ", styleData);
         dispatch(applyStyles(styleData));
       } catch (error) {

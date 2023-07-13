@@ -9,7 +9,7 @@ const WidgetSettings = ({ setIsSetting }) => {
   const [responseBack, setResponseBack] = useState("");
   const [headerFont, setHeaderFont] = useState("");
   const [chatFont, setChatFont] = useState("");
-  const [launcherBack, setLauncherBack] = useState("");
+  // const [launcherBack, setLauncherBack] = useState("");
   const styles = useSelector(selectStyles);
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const WidgetSettings = ({ setIsSetting }) => {
     setResponseBack(styles.secondaryColor);
     setHeaderFont(styles.titleFont);
     setChatFont(styles.chatFont);
-    setLauncherBack(styles.launcherColor);
+    // setLauncherBack(styles.launcherColor);
   }, [styles]);
 
   const onHeaderColorChange = (e) => {
@@ -37,9 +37,9 @@ const WidgetSettings = ({ setIsSetting }) => {
   const onChatFontChange = (e) => {
     setChatFont(e.target.value + "px");
   };
-  const onLauncherColorChange = (e) => {
-    setLauncherBack(e.target.value);
-  };
+  // const onLauncherColorChange = (e) => {
+  //   setLauncherBack(e.target.value);
+  // };
   const onClose = () => {
     setIsSetting(false);
   };
@@ -51,7 +51,7 @@ const WidgetSettings = ({ setIsSetting }) => {
         primaryColor: messageBack,
         secondaryColor: responseBack,
         chatFont: chatFont,
-        launcherColor: launcherBack,
+        launcherColor: headerBack,
       })
     );
   };
@@ -134,7 +134,7 @@ const WidgetSettings = ({ setIsSetting }) => {
               onChange={onResponseColorChange}
             />
           </div>
-          <div
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -152,7 +152,7 @@ const WidgetSettings = ({ setIsSetting }) => {
               value={launcherBack}
               onChange={onLauncherColorChange}
             />
-          </div>
+          </div> */}
           <div
             style={{
               display: "flex",
