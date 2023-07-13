@@ -1,8 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  headerBackground: "#123456",
-  primaryColor: "#333333",
+  headerBackground: "#004588",
+  titleFont: "22px",
+  subtitleFont: "14px",
+  primaryColor: "#a3eaf7",
+  messageColor: "black",
+  secondaryColor: "black",
+  responseColor: "white",
+  chatFont: "12px",
 };
 
 export const stylesSlice = createSlice({
@@ -26,18 +32,6 @@ export const stylesSlice = createSlice({
         ...action.payload,
       };
     },
-    // applyStyles: (state) => {
-    //   console.log("style from store: ", state);
-    //   Object.entries(state).forEach(([property, value]) => {
-    //     const convertedProperty = property
-    //       .replace(/([A-Z])/g, "-$1")
-    //       .toLowerCase();
-    //     document.documentElement.style.setProperty(
-    //       `--${convertedProperty}`,
-    //       value
-    //     );
-    //   });
-    // },
   },
 });
 

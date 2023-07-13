@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { applyStyles } from "./store/styles";
 
 function App() {
-  // const [widgetStyles, setWidgetStyles] = useState({});
+
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
 
@@ -25,7 +25,6 @@ function App() {
         });
         const styleData = await response.json();
         setIsLoaded(true);
-        // setWidgetStyles(styleData);
         console.log('style from db: ', styleData)
         dispatch(applyStyles(styleData));
       } catch (error) {
@@ -39,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <WidgetSettings /> */}
+      <WidgetSettings />      
       <ChatWidget />
     </div>
   );
