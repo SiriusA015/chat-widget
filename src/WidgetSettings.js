@@ -3,12 +3,13 @@ import { useSelector } from "react-redux";
 import { applyStyles, selectStyles } from "./store/styles";
 import { useDispatch } from "react-redux";
 
-const WidgetSettings = () => {
+const WidgetSettings = ({ setIsSetting }) => {
   const [headerBack, setHeaderBack] = useState("");
   const [messageBack, setMessageBack] = useState("");
   const [responseBack, setResponseBack] = useState("");
   const [headerFont, setHeaderFont] = useState("");
   const [chatFont, setChatFont] = useState("");
+  const [launcherBack, setLauncherBack] = useState("");
   const styles = useSelector(selectStyles);
   const dispatch = useDispatch();
 
@@ -18,6 +19,7 @@ const WidgetSettings = () => {
     setResponseBack(styles.secondaryColor);
     setHeaderFont(styles.titleFont);
     setChatFont(styles.chatFont);
+    setLauncherBack(styles.launcherColor);
   }, [styles]);
 
   const onHeaderColorChange = (e) => {
@@ -35,21 +37,29 @@ const WidgetSettings = () => {
   const onChatFontChange = (e) => {
     setChatFont(e.target.value + "px");
   };
-
+  const onLauncherColorChange = (e) => {
+    setLauncherBack(e.target.value);
+  };
+  const onClose = () => {
+    setIsSetting(false);
+  };
   const onApplyStyle = () => {
-    dispatch(applyStyles({
-      headerBackground: headerBack,
-      titleFont: headerFont,    
-      primaryColor: messageBack,  
-      secondaryColor: responseBack,
-      chatFont: chatFont,
-    }));
+    dispatch(
+      applyStyles({
+        headerBackground: headerBack,
+        titleFont: headerFont,
+        primaryColor: messageBack,
+        secondaryColor: responseBack,
+        chatFont: chatFont,
+        launcherColor: launcherBack,
+      })
+    );
   };
   return (
-    <div style={{ position: "fixed", bottom: "10px", right: "500px" }}>
+    <div className="setting-position" style={{ position: "fixed", bottom: "10px", zIndex: '100' }}>
       <div
         style={{
-          border: "1px",
+          border: "2px",
           borderStyle: "solid",
           width: "380px",
           display: "flex",
@@ -58,11 +68,18 @@ const WidgetSettings = () => {
           paddingBottom: "20px",
           borderRadius: "10px",
           borderColor: "#004A4E",
+          boxShadow: "4px 6px 6px #888888",
+          position: "relative",
         }}
       >
         <h1 className="title-text">Widget Settings</h1>
         <div
-          style={{ border: "1px", borderBottomStyle: "solid", width: "100%" }}
+          style={{
+            border: "1px",
+            borderBottomStyle: "solid",
+            borderColor: "#004A4E",
+            width: "100%",
+          }}
         ></div>
         <div style={{ marginTop: "50px" }}>
           <div
@@ -90,9 +107,7 @@ const WidgetSettings = () => {
               marginTop: "20px",
             }}
           >
-            <div style={{ fontSize: "16px", fontWeight: "bold" }}>
-              Message:{" "}
-            </div>
+            <div style={{ fontSize: "16px", fontWeight: "bold" }}>Message:</div>
             <input
               type="color"
               name="favcolor"
@@ -110,7 +125,7 @@ const WidgetSettings = () => {
             }}
           >
             <div style={{ fontSize: "16px", fontWeight: "bold" }}>
-              Response:{" "}
+              Response:
             </div>
             <input
               type="color"
@@ -124,12 +139,31 @@ const WidgetSettings = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              width: "200px",
+              marginTop: "20px",
+            }}
+          >
+            <div style={{ fontSize: "16px", fontWeight: "bold" }}>
+              Launcher:
+            </div>
+            <input
+              type="color"
+              name="favcolor"
+              value={launcherBack}
+              onChange={onLauncherColorChange}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
               width: "270px",
               marginTop: "20px",
             }}
           >
             <div style={{ fontSize: "16px", fontWeight: "bold" }}>
-              Title font:{" "}
+              Title font:
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
               <input
@@ -160,7 +194,7 @@ const WidgetSettings = () => {
             }}
           >
             <div style={{ fontSize: "16px", fontWeight: "bold" }}>
-              Chat font:{" "}
+              Chat font:
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
               <input
@@ -183,11 +217,30 @@ const WidgetSettings = () => {
           </div>
         </div>
         <button
-          style={{ marginTop: "30px", fontSize: "16px", fontWeight: "bold" }}
+          style={{
+            width: "100px",
+            borderRadius: "7px",
+            borderColor: "#004A4E",
+            marginTop: "30px",
+            fontSize: "16px",
+            fontWeight: "bold",
+            color: "#004A4E",
+          }}
           onClick={onApplyStyle}
         >
           Apply
         </button>
+        <div
+          style={{
+            position: "absolute",
+            top: "5px",
+            right: "5px",
+            cursor: "pointer",
+          }}
+          onClick={onClose}
+        >
+          <img src="close.png" style={{ width: "30px", height: "30px" }} />
+        </div>
       </div>
     </div>
   );

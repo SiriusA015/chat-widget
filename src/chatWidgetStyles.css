@@ -26,3 +26,7 @@
 .rcw-messages-container {
   font-size: var(--chat-font, 12px);
 }
+
+.rcw-launcher {
+  background-color: var(--launcher-color, #35cce6);
+}

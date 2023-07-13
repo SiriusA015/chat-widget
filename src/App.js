@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import { applyStyles } from "./store/styles";
 
 function App() {
-
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
+  const [isSetting, setIsSetting] = useState(true);
 
   useEffect(() => {
     const fetchWidgetStyles = async () => {
@@ -25,7 +25,7 @@ function App() {
         });
         const styleData = await response.json();
         setIsLoaded(true);
-        console.log('style from db: ', styleData)
+        console.log("style from db: ", styleData);
         dispatch(applyStyles(styleData));
       } catch (error) {
         console.error("Error:", error);
@@ -38,7 +38,15 @@ function App() {
 
   return (
     <div className="App">
-      <WidgetSettings />      
+      <div
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          setIsSetting(true);
+        }}
+      >
+        <img src="setting.png" style={{ width: "50px", height: "50px" }} />
+      </div>
+      {isSetting && <WidgetSettings setIsSetting={setIsSetting} />}
       <ChatWidget />
     </div>
   );

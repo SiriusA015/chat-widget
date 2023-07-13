@@ -9,6 +9,7 @@ const initialState = {
   secondaryColor: "black",
   responseColor: "white",
   chatFont: "12px",
+  launcherColor: "#35cce6",
 };
 
 export const stylesSlice = createSlice({
@@ -26,7 +27,7 @@ export const stylesSlice = createSlice({
           value
         );
       });
-
+      // Here api to send request to the server side
       return {
         ...state,
         ...action.payload,

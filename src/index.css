@@ -13,7 +13,23 @@ code {
 }
 
 .title-text {
-  background: -webkit-linear-gradient(rgb(77, 74, 78), rgb(53, 25, 151));
+  background: -webkit-linear-gradient(rgb(202, 219, 101), rgb(56, 6, 238));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media screen and (max-width: 800px) {
+  .setting-position{
+    left: 10px;
+  }
+}
+@media screen and (min-width: 800px) {
+  .setting-position{
+    right: 400px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .setting-position{
+    right: 500px;
+  }
 }
