@@ -3,10 +3,11 @@ import { Widget, addResponseMessage } from "react-chat-widget";
 import "react-chat-widget/lib/styles.css";
 import { v4 as uuidv4 } from "uuid";
 import "./chatWidgetStyles.css";
+import { Tooltip } from "react-tooltip";
 
-const ChatWidget = () => {
+const ChatWidget = ({ lancherIcon }) => {
   const [customerData, setCustomerData] = useState(null);
-
+  const [bShowTooltip, setShowTooltip] = useState(false);
   useEffect(() => {
     const fetchCustomerData = async () => {
       const url = "https://your-server-url.com/get-customer-data";
@@ -56,18 +57,45 @@ const ChatWidget = () => {
     }
   };
 
+  const handleTooltip = () => {
+    console.log("btooltip: ", bShowTooltip);
+    setShowTooltip(!bShowTooltip);
+  };
   return (
-    <div className="apply-font">
-      <Widget       
-        handleNewUserMessage={handleNewUserMessage}
-        title="Chat Widget"
-        subtitle="Ask us anything!"
-        senderPlaceHolder="Type a message..."
-        emojis="true"
-        launcherOpenLabel="open chat"
-        launcherCloseLabel="close chat"
-      />
-    </div>
+    <>
+      <div
+        className="apply-font"
+        data-tooltip-id="my-tooltip"
+        data-tooltip-content="Hello world!"
+        data-tooltip-place="top"
+      >
+        <Widget
+          handleNewUserMessage={handleNewUserMessage}
+          title="Chat Widget"
+          subtitle="Ask us anything!"
+          senderPlaceHolder="Type a message..."
+          emojis="true"
+          launcherOpenImg={lancherIcon}
+          onMouseEnter={() => {
+            handleTooltip();
+          }}
+          className="widget-with-tooltip"
+        />
+        {bShowTooltip && (
+          <div
+            style={{
+              position: "fixed",
+              right: "150px",
+              bottom: "30px",
+              width: "200px",
+              height: "50px",
+            }}
+          >
+            Chat with us
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

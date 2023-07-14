@@ -8,7 +8,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
   const [isSetting, setIsSetting] = useState(true);
-
+  const [lancherIcon, setLauncherIcon] = useState(0);
   useEffect(() => {
     const fetchWidgetStyles = async () => {
       const url =
@@ -49,8 +49,8 @@ function App() {
       >
         <img src="setting.png" style={{ width: "50px", height: "50px" }} />
       </div>
-      {isSetting && <WidgetSettings setIsSetting={setIsSetting} />}
-      <ChatWidget />
+      {isSetting && <WidgetSettings setIsSetting={setIsSetting} setLauncherIcon={setLauncherIcon} />}
+      <ChatWidget lancherIcon={lancherIcon} />
     </div>
   );
 }

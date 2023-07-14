@@ -30,3 +30,8 @@
 .rcw-launcher {
   background-color: var(--launcher-color, #004588);
 }
+
+.rcw-open-launcher {
+  width: 40px;
+  height: 40px;
+}
