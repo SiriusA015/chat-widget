@@ -8,11 +8,6 @@ const ChatWidget = () => {
   const [customerData, setCustomerData] = useState(null);
 
   useEffect(() => {
-    const widgetContainer = document.querySelector(".rcw-widget-container");
-    widgetContainer.classList.add("apply-font");
-    console.log('add new class!')
-  }, []);
-  useEffect(() => {
     const fetchCustomerData = async () => {
       const url = "https://your-server-url.com/get-customer-data";
       try {
@@ -62,14 +57,17 @@ const ChatWidget = () => {
   };
 
   return (
-    <Widget
-      className="apply-font"
-      handleNewUserMessage={handleNewUserMessage}
-      title="Chat Widget"
-      subtitle="Ask us anything!"
-      senderPlaceHolder="Type a message..."
-      emojis="true"
-    />
+    <div className="apply-font">
+      <Widget       
+        handleNewUserMessage={handleNewUserMessage}
+        title="Chat Widget"
+        subtitle="Ask us anything!"
+        senderPlaceHolder="Type a message..."
+        emojis="true"
+        launcherOpenLabel="open chat"
+        launcherCloseLabel="close chat"
+      />
+    </div>
   );
 };
 
