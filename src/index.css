@@ -33,7 +33,3 @@ code {
     right: 500px;
   }
 }
-.widget-with-tooltip::before {
-  content: "Tooltip text";
-  /* Additional CSS properties for tooltip styling */
-}

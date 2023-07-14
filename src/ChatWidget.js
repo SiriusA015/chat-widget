@@ -25,6 +25,16 @@ const ChatWidget = ({ lancherIcon }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const widgetElement = document.querySelector(".rcw-close-widget-container");
+    widgetElement.addEventListener("mouseover", () => {
+      setShowTooltip(true);
+      console.log('over launcher!')
+    });
+    widgetElement.addEventListener("mouseout", () => {
+      setShowTooltip(false);
+    });
+  }, []);
   const handleNewUserMessage = async (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
     console.log(`Customer Data: ${customerData}`);
@@ -57,10 +67,6 @@ const ChatWidget = ({ lancherIcon }) => {
     }
   };
 
-  const handleTooltip = () => {
-    console.log("btooltip: ", bShowTooltip);
-    setShowTooltip(!bShowTooltip);
-  };
   return (
     <>
       <div
@@ -76,19 +82,25 @@ const ChatWidget = ({ lancherIcon }) => {
           senderPlaceHolder="Type a message..."
           emojis="true"
           launcherOpenImg={lancherIcon}
-          onMouseEnter={() => {
-            handleTooltip();
-          }}
-          className="widget-with-tooltip"
+          data-tip="Tooltip content"
         />
         {bShowTooltip && (
           <div
             style={{
-              position: "fixed",
-              right: "150px",
-              bottom: "30px",
-              width: "200px",
-              height: "50px",
+              position: 'absolute',
+              right:'90px',
+              bottom: '30px',
+              paddingLeft: "20px",
+              paddingRight: "20px",
+              paddingTop: "5px",
+              paddingBottom: "5px",
+              backgroundColor: "#fff",
+              border: '1px',
+              borderColor: '#004588',
+              border: 'solid',            
+              borderRadius: "10px",
+              width: '100px',
+              textAlign: 'center',              
             }}
           >
             Chat with us
