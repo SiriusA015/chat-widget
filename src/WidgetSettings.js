@@ -96,7 +96,7 @@ const WidgetSettings = ({ setIsSetting }) => {
               gap: "10px",
             }}
           >
-            <div            
+            <div               
               style={{ fontSize: "16px", fontWeight: "bold", width: "130px" }}
             >
               Font Family:

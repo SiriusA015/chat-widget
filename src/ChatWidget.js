@@ -8,6 +8,11 @@ const ChatWidget = () => {
   const [customerData, setCustomerData] = useState(null);
 
   useEffect(() => {
+    const widgetContainer = document.querySelector(".rcw-widget-container");
+    widgetContainer.classList.add("apply-font");
+    console.log('add new class!')
+  }, []);
+  useEffect(() => {
     const fetchCustomerData = async () => {
       const url = "https://your-server-url.com/get-customer-data";
       try {
