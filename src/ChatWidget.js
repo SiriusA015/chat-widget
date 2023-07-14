@@ -3,11 +3,11 @@ import { Widget, addResponseMessage } from "react-chat-widget";
 import "react-chat-widget/lib/styles.css";
 import { v4 as uuidv4 } from "uuid";
 import "./chatWidgetStyles.css";
-import { Tooltip } from "react-tooltip";
 
 const ChatWidget = ({ lancherIcon }) => {
   const [customerData, setCustomerData] = useState(null);
   const [bShowTooltip, setShowTooltip] = useState(false);
+  const [isToggle, setToggleStatus] = useState(false);
   useEffect(() => {
     const fetchCustomerData = async () => {
       const url = "https://your-server-url.com/get-customer-data";
@@ -26,10 +26,9 @@ const ChatWidget = ({ lancherIcon }) => {
   }, []);
 
   useEffect(() => {
-    const widgetElement = document.querySelector(".rcw-close-widget-container");
+    const widgetElement = document.querySelector(".rcw-open-launcher");
     widgetElement.addEventListener("mouseover", () => {
       setShowTooltip(true);
-      console.log('over launcher!')
     });
     widgetElement.addEventListener("mouseout", () => {
       setShowTooltip(false);
@@ -66,6 +65,9 @@ const ChatWidget = ({ lancherIcon }) => {
       console.error("Error:", error);
     }
   };
+  const handleToggle = (e) => {
+    setToggleStatus(!isToggle);
+  };
 
   return (
     <>
@@ -83,24 +85,26 @@ const ChatWidget = ({ lancherIcon }) => {
           emojis="true"
           launcherOpenImg={lancherIcon}
           data-tip="Tooltip content"
+          handleToggle={handleToggle}
         />
-        {bShowTooltip && (
+        {bShowTooltip && !isToggle && (
           <div
             style={{
-              position: 'absolute',
-              right:'90px',
-              bottom: '30px',
+              position: "absolute",
+              right: "90px",
+              bottom: "30px",
               paddingLeft: "20px",
               paddingRight: "20px",
               paddingTop: "5px",
               paddingBottom: "5px",
               backgroundColor: "#fff",
-              border: '1px',
-              borderColor: '#004588',
-              border: 'solid',            
+              border: "1px",
+              borderColor: "#004588",
+              border: "solid",
               borderRadius: "10px",
-              width: '100px',
-              textAlign: 'center',              
+              width: "100px",
+              textAlign: "center",
+              fontWeight: "bold",
             }}
           >
             Chat with us
