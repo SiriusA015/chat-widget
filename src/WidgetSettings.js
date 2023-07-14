@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { applyStyles, selectStyles } from "./store/styles";
 import { useDispatch } from "react-redux";
+import FontPicker from "font-picker-react";
 
 const WidgetSettings = ({ setIsSetting }) => {
   const [headerBack, setHeaderBack] = useState("");
@@ -9,6 +10,7 @@ const WidgetSettings = ({ setIsSetting }) => {
   const [responseBack, setResponseBack] = useState("");
   const [headerFont, setHeaderFont] = useState("");
   const [chatFont, setChatFont] = useState("");
+  const [activeFontFamily, setFontFamily] = useState();
   // const [launcherBack, setLauncherBack] = useState("");
   const styles = useSelector(selectStyles);
   const dispatch = useDispatch();
@@ -56,7 +58,10 @@ const WidgetSettings = ({ setIsSetting }) => {
     );
   };
   return (
-    <div className="setting-position" style={{ position: "fixed", bottom: "10px", zIndex: '100' }}>
+    <div
+      className="setting-position"
+      style={{ position: "fixed", bottom: "10px", zIndex: "100" }}
+    >
       <div
         style={{
           border: "2px",
@@ -87,10 +92,33 @@ const WidgetSettings = ({ setIsSetting }) => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              width: "200px",
+              width: "250px",
+              gap: "10px",
             }}
           >
-            <div style={{ fontSize: "16px", fontWeight: "bold" }}>Header: </div>
+            <div            
+              style={{ fontSize: "16px", fontWeight: "bold", width: "130px" }}
+            >
+              Font Family:
+            </div>
+            <FontPicker
+              apiKey="AIzaSyDPHet-7HlLEQLPby3eJIghwS_SFHPzcDs"
+              activeFontFamily={activeFontFamily}
+              onChange={(nextFont) => {
+                setFontFamily(nextFont.family);
+              }}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "200px",
+              marginTop: "20px",
+            }}
+          >
+            <div style={{ fontSize: "16px", fontWeight: "bold" }}>Header:</div>
             <input
               type="color"
               name="favcolor"

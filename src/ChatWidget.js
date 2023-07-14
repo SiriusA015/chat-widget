@@ -58,6 +58,7 @@ const ChatWidget = () => {
 
   return (
     <Widget
+      className="apply-font"
       handleNewUserMessage={handleNewUserMessage}
       title="Chat Widget"
       subtitle="Ask us anything!"
